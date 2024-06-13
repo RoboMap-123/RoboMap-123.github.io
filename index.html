@@ -31,24 +31,41 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Deblur-NeRF: Neural Radiance Fields from Blurry Images</h1>
+          <h1 class="title is-1 publication-title">Is Your HD Map Constructor Reliable under Sensor Corruptions?</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://github.com/limacv">Ma Li</a><sup>1</sup>,</span>
+              <a href="https://github.com/xshuai714">Xiaoshuai Hao</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://xiaoyu258.github.io/">Li Xiaoyu</a><sup>2</sup>,</span>
+              <a href="https://xiaoyu258.github.io/">Mengchuan Wei</a><sup>2</sup>,</span>
             <span class="author-block">
-              <a href="https://liaojing.github.io/html/">Liao Jing</a><sup>3</sup>,
+              <a href="https://liaojing.github.io/html/">Yifan Yang</a><sup>3</sup>,
             </span>
             <span class="author-block">
-              <a href="http://sofienbouaziz.com">Zhang Qi</a><sup>2</sup>,
+              <a href="http://sofienbouaziz.com">Haimei ZhaoZhang Qi</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://xuanwangvc.github.io/">Wang Xuan</a><sup>2</sup>,
+              <a href="https://xuanwangvc.github.io/">Hui Zhang</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://juewang725.github.io/">Wang Jue</a><sup>2</sup>,
+              <a href="https://juewang725.github.io/">Yi Zhou</a><sup>2</sup>,
             </span>
+             <span class="author-block">
+              <a href="https://juewang725.github.io/">Weiming Li</a><sup>2</sup>,
+            </span>
+             <span class="author-block">
+              <a href="https://juewang725.github.io/">Qiang Wang</a><sup>2</sup>,
+            </span>
+
+            </span>
+             <span class="author-block">
+              <a href="https://juewang725.github.io/">Lingdong Kong</a><sup>2</sup>,
+            </span>
+
+            </span>
+             <span class="author-block">
+              <a href="https://juewang725.github.io/">Jing Zhang</a><sup>2</sup>,
+            </span>
+            
             <span class="author-block">
               <a href="https://www.cse.ust.hk/~psander/">Pedro V. Sander</a><sup>1</sup>
             </span>
@@ -172,17 +189,14 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We propose Deblur-NeRF, the first method that can recover a sharp NeRF from blurry input. 
-            We adopt an analysis-by-synthesis approach that reconstructs blurry views by simulating the 
-            blurring process, thus making NeRF robust to blurry inputs. The core of this simulation is 
-            a novel <b>Deformable Sparse Kernel (DSK)</b> module that models spatially-varying blur kernels by 
-            deforming a canonical sparse kernel at each spatial location. The ray origin of each kernel 
-            point is jointly optimized, inspired by the physical blurring process. This module is 
-            parameterized as an MLP that has the ability to be generalized to various blur types. 
-            Jointly optimizing the NeRF and the DSK module allows us to restore a sharp NeRF. 
-            We demonstrate that our method can be used on both camera motion blur and defocus blur: 
-            the two most common types of blur in real scenes. Evaluation results on both synthetic 
-            and real-world data show that our method outperforms several baselines.
+            Driving systems often rely on high-definition (HD) maps for precise environmental information, which is crucial for planning and navigation. 
+            While current HD map constructors perform well under ideal conditions, their resilience to real-world challenges, e.g., adverse weather and sensor failures, is not well understood, raising safety concerns. 
+            This work introduces MapBench, the first comprehensive benchmark designed to evaluate the robustness of HD map construction methods against various sensor corruptions. 
+            Our benchmark encompasses a total of 29 types of corruptions that occur from cameras and LiDAR sensors. 
+            Extensive evaluations across $31$ HD map constructors reveal significant performance degradation of existing methods under adverse weather conditions and sensor failures, underscoring critical safety concerns. 
+              We identify effective strategies for enhancing robustness, including innovative approaches that leverage multi-modal fusion, advanced data augmentation, and architectural techniques. 
+            These insights provide a pathway for developing more reliable HD map construction methods, which are essential for the advancement of autonomous driving technology. 
+            The benchmark toolkit and affiliated code and model checkpoints have been made publicly accessible.
           </p>
         </div>
       </div>
