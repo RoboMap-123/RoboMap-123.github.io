@@ -2,9 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="Deblur-NeRF">
-  <meta name="keywords" content="Deblur, NeRF, Defocus blur, Motion blur">
+  <meta name="description" content="MapBench">
+  <meta name="keywords" content="MapBench">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MapBench</title>
 
@@ -12,8 +11,7 @@
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
 
@@ -160,36 +158,33 @@
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-2">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We propose Deblur-NeRF, the first method that can recover a sharp NeRF from blurry input. 
-            We adopt an analysis-by-synthesis approach that reconstructs blurry views by simulating the 
-            blurring process, thus making NeRF robust to blurry inputs. The core of this simulation is 
-            a novel <b>Deformable Sparse Kernel (DSK)</b> module that models spatially-varying blur kernels by 
-            deforming a canonical sparse kernel at each spatial location. The ray origin of each kernel 
-            point is jointly optimized, inspired by the physical blurring process. This module is 
-            parameterized as an MLP that has the ability to be generalized to various blur types. 
-            Jointly optimizing the NeRF and the DSK module allows us to restore a sharp NeRF. 
-            We demonstrate that our method can be used on both camera motion blur and defocus blur: 
-            the two most common types of blur in real scenes. Evaluation results on both synthetic 
-            and real-world data show that our method outperforms several baselines.
+            Driving systems often rely on high-definition (HD) maps for precise environmental information, which is crucial for planning and navigation. 
+            While current HD map constructors perform well under ideal conditions, their resilience to real-world challenges, e.g., adverse weather and sensor failures, is not well understood, raising safety concerns. 
+            This work introduces <b>MapBench</b>, the first comprehensive benchmark designed to evaluate the robustness of HD map construction methods against various sensor corruptions. 
+            Our benchmark encompasses a total of <b>29</b> types of corruptions that occur from cameras and LiDAR sensors. 
+            Extensive evaluations across <b>31</b> HD map constructors reveal significant performance degradation of existing methods under adverse weather conditions and sensor failures, underscoring critical safety concerns. 
+            We identify effective strategies for enhancing robustness, including innovative approaches that leverage multi-modal fusion, advanced data augmentation, and architectural techniques. 
+            These insights provide a pathway for developing more reliable HD map construction methods, which are essential for the advancement of autonomous driving technology. 
+            The benchmark toolkit and affiliated code and model checkpoints have been made publicly accessible.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
 
-    <!-- Pipeline. -->
+    <hr>
+
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Pipeline</h2>
+        <h2 class="title is-2">Benchmark Definition</h2>
         <div class="pipeline">
-          <img src="https://limacv.github.io/deblurnerf/images/pipeline.png"
-                 class="pipeline image"
-                 alt="pipeline image"/>
-          <!-- <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+          <img 
+              src="images/definition.png"
+              class="pipeline image"
+              alt="pipeline image"
+          />
         </div>
       </div>
     </div>
@@ -198,33 +193,106 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
           <p>
-            When rendering a ray, we first predict N sparse optimized rays based on a 
-            canonical kernel along with their weights. After rendering these rays, 
-            we combine the results to get the blurry pixel. During testing, we can directly 
-            render the rays without kernel deformation resulting in a sharp image.
+            The definitions of the <b>Camera</b> and <b>LiDAR</b> sensor corruptions in the proposed <b>MapBench</b>. 
+            Our benchmark encompasses a total of 16 corruption types for HD map construction, which can be categorized into exterior, interior, and sensor failure scenarios. 
+            Besides, we define 13 multi-sensor corruptions by combining the camera and LiDAR sensor failure types. 
           </p>
         </div>
       </div>
     </div>
-    <!--/ Pipeline. -->
-  </div>
+
+    <hr>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Benchmark Study</h2>
+        <div class="pipeline">
+        <img 
+            src="images/benchmark.png"
+            class="pipeline image"
+            alt="pipeline image"
+        />
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+          Complete list of 31 HD map constructors evaluated in <b>MapBench</b>. 
+          Basic information of different models includes input modality, BEV Encoder, backbone, training epoch, and performance on the clean nuScenes validation set. 
+          “L” and “C” represent LiDAR and camera, respectively. 
+          “Effi-B0”, “R50”, “PP”, and “Sec” are short for EfficientNet-B0, ResNet50, PointPillars, and SECOND, respectively. 
+          † denotes the result is reproduced with the released model. 
+          ‡ means that we modify the public code and obtain results with the model trained by ourselves. 
+          ped., div., and bou. are short for pedestrian-crossing, divider, and boundary.
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Map Construction Robustness</h2>
+        <div class="pipeline">
+        <img 
+            src="images/qua.png"
+            class="pipeline image"
+            alt="pipeline image"
+        />
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+          Qualitative assessment of the state-of-the-art camera-LiDAR fusion-based HD map construction method under the <b>Camera</b> and <b>LiDAR</b> combined sensor corruptions.
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Corruption Severity</h2>
+        <div class="pipeline">
+        <img 
+            src="images/levels.png"
+            class="pipeline image"
+            alt="pipeline image"
+        />
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+          The map construction accuracy of state-of-the-art HD map constructors under each of the three severity levels (Esay, Moderate, and Hard) in different <b>Camera</b> and <b>LiDAR</b> sensor corruption scenarios.
+        </p>
+        </div>
+      </div>
+    </div>
+
+
+</div>
+</div>
+
 </section>
 
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">More results</h2>
-      </div>
-    </div>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-          <p>
-            We show more deblurring results below. The nearest videos are shown on the bottom right
-            of each clip. Some of the videos shown are from synthetic datasets.
-          </p>
-        </div>
+        <h2 class="title is-2">Sensor Corruptions</h2>
       </div>
     </div>
   </div>
@@ -232,121 +300,339 @@
 
 <section class="hero is-light is-small">
   <div class="hero-body">
-    <h2 class="title is-3">Camera Motion Blur</h2>
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Wet Ground</h3>
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-blurgirl">
-          <video poster="" id="blurgirl" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurgirl.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item">
+          <img src="GIFs/lidar/wet_ground-light.gif"/>
         </div>
         <div class="item item-blurcozyroom">
-          <video poster="" id="blurcozyroom" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurcozyroom.mp4"
-                    type="video/mp4">
-          </video>
+          <img src="GIFs/lidar/wet_ground-moderate.gif"/>
         </div>
-        <div class="item item-blurdecoration">
-          <video poster="" id="blurdecoration" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurdecoration.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/wet_ground-heavy.gif"/>
         </div>
-        <div class="item item-blurbasket">
-          <video poster="" id="blurbasket" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurbasket.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blurheron">
-          <video poster="" id="blurheron" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurheron.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blurpool">
-          <video poster="" id="blurpool" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurpool.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blurpuppet">
-          <video poster="" id="blurpuppet" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurpuppet.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blurstair">
-          <video poster="" id="blurstair" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/blurstair.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+</br>
 
 <section class="hero is-light is-small">
   <div class="hero-body">
-    <h2 class="title is-3">Defocus Blur</h2>
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Fog</h3>
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-defocuscoral">
-          <video poster="" id="defocuscoral" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocuscoral.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item">
+          <img src="GIFs/lidar/fog-light.gif"/>
         </div>
-        <div class="item item-defocuscupcake">
-          <video poster="" id="defocuscupcake" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocuscupcake.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/fog-moderate.gif"/>
         </div>
-        <div class="item item-defocusdaisy">
-          <video poster="" id="defocusdaisy" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocusdaisy.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/fog-heavy.gif"/>
         </div>
-        <div class="item item-defocuscisco">
-          <video poster="" id="defocuscisco" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocuscisco.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-defocusseal">
-          <video poster="" id="defocusseal" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocusseal.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-defocustanabata">
-          <video poster="" id="defocustanabata" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocustanabata.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-defocustools">
-          <video poster="" id="defocustools" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocustools.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-defocuswine">
-          <video poster="" id="defocuswine" autoplay controls muted loop height="100%">
-            <source src="https://limacv.github.io/deblurnerf/images/defocuswine.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+</br>
+
 <section class="hero is-light is-small">
+  <div class="hero-body">
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Snow</h3>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/lidar/snow-heavy.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/snow-moderate.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/snow-light.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Motion Blur</h3>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/lidar/motion_blur-light.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/motion_blur-moderate.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/motion_blur-heavy.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Beam Missing</h3>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/lidar/beam_missing-light.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/beam_missing-moderate.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/beam_missing-heavy.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Crosstalk</h3>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/lidar/crosstalk-light.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/crosstalk-moderate.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/crosstalk-heavy.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Incomplete Echo</h3>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/lidar/incomplete_echo-light.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/incomplete_echo-moderate.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/incomplete_echo-heavy.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; LiDAR - Cross-Sensor</h3>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/lidar/cross_sensor-light.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/cross_sensor-moderate.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/cross_sensor-heavy.gif"/>
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/lidar/clean.gif"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h2 class="title is-3">Camera - Brightness</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/camera/brightness-easy.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/brightness-mid.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/brightness-hard.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/clean.gif" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h2 class="title is-3">Camera - Low-Light</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/camera/low-light-easy.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/low-light-mid.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/low-light-hard.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/clean.gif" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h2 class="title is-3">Camera - Fog</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/camera/fog-easy.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/fog-mid.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/fog-hard.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/clean.gif" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h2 class="title is-3">Camera - Snow</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/camera/snow-easy.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/snow-mid.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/snow-hard.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/clean.gif" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h2 class="title is-3">Camera - Motion Blur</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/camera/motion-blur-easy.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/motion-blur-mid.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/motion-blur-hard.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/clean.gif" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <h2 class="title is-3">Camera - Color Quant</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item">
+          <img src="GIFs/camera/color-quant-easy.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/color-quant-mid.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/color-quant-hard.gif" />
+        </div>
+        <div class="item item-blurcozyroom">
+          <img src="GIFs/camera/clean.gif" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero is-light is-small">
   <div class="hero-body">
     <h2 class="title is-3">Object Motion Blur</h2>
     <div class="container">
@@ -357,20 +643,98 @@
       </div>
     </div>
   </div>
+</section> -->
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Robustness Evaluation</h2>
+        <div class="pipeline">
+        <img 
+            src="images/robustness.png"
+            class="pipeline image"
+            alt="pipeline image"
+        />
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+          Benchmarking HD map constructors. 
+          Methods are split into groups based on input modality, BEV encoder, backbone, and training epochs. 
+          “L” and “C” represent LiDAR and camera, respectively. 
+          “Effi-B0”, “R50”, “PP”, and “SEC” are short for EfficientNet-B0, ResNet50, PointPillars, and SECOND. 
+          AP denotes performance on the clean nuScenes val set. 
+          The subscripts b., p., and d. are short for the boundary, pedestrian crossing, and divider, respectively.
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-2">Multi-Sensor Corruptions</h2>
+        <div class="pipeline">
+        <img 
+            src="images/maptr.png"
+            class="pipeline image"
+            alt="pipeline image"
+        />
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+          The results of the MapTR model under different model configurations and multi-sensor corruption types.
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+</div>
+</div>
+
 </section>
+
+
+
+
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
+    <h2 class="title">License</h2>
+    <p>The datasets and benchmarks are under the Creative Commons Attribution-NonCommercial-ShareAlike
+      4.0 International License</p>
+  </div>
+</section>
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@article{ma2021deblur,
-      title   ={Deblur-NeRF: Neural Radiance Fields from Blurry Images},
-      author  ={Ma, Li and Li, Xiaoyu and Liao, Jing and Zhang, Qi and Wang, Xuan and Wang, Jue and Pedro V. Sander},
-      journal ={arXiv preprint arXiv:2111.14292},
-      year    ={2021}
+    <pre><code>@article{hao2024mapbench,
+      title   ={},
+      author  ={},
+      journal ={arXiv preprint arXiv:},
+      year    ={2024}
 }
 </code></pre>
   </div>
-</section>
+</section> -->
 
 
 <footer class="footer">
@@ -391,7 +755,7 @@
             The source code of this website is borrowed from 
             <a href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
           </p>
-          <p>
+          <!-- <p>
             This website is licensed under a <a rel="license"
                                                 href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
             Commons Attribution-ShareAlike 4.0 International License</a>.
@@ -402,7 +766,7 @@
             we just ask that you link back to this page in the footer.
             Please remember to remove the analytics code included in the header of the website which
             you do not want on your website.
-          </p>
+          </p> -->
         </div>
       </div>
     </div>
