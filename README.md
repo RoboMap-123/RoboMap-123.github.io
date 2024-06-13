@@ -1,6 +1,6 @@
-# Deblur-NeRF
+# MapBench
 
-This is the repository that contains source code for the [Deblur-NeRF website](https://limacv.github.io/deblurnerf/).
+This is the repository that contains source code for the [MapBench website](https://mapbench.github.io).
 
 If you find it useful for your work please cite:
 ```
