@@ -1,4 +1,4 @@
-# MapBench
+# MSC-Bench
 
 This is the repository that contains the source code for the [MSC-Bench website](https://msc-bench.github.io).
 
