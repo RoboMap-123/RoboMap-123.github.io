@@ -220,26 +220,21 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-          Complete list of 31 HD map constructors evaluated in <b>MapBench</b>. 
-          Basic information of different models includes input modality, BEV Encoder, backbone, training epoch, and performance on the clean nuScenes validation set. 
-          “L” and “C” represent LiDAR and camera, respectively. 
-          “Effi-B0”, “R50”, “PP”, and “Sec” are short for EfficientNet-B0, ResNet50, PointPillars, and SECOND, respectively. 
-          † denotes the result is reproduced with the released model. 
-          ‡ means that we modify the public code and obtain results with the model trained by ourselves. 
-          ped., div., and bou. are short for pedestrian-crossing, divider, and boundary.
+          Benchmarking 3D object detection models. 
+          We report detailed information on the methods grouped by input modality, backbone, and input image size. 
+          “L” and “C” represent Lidar and Camera, respectively. 
+          ‘Swin-T”, “R50”, “VOV-99”, and “SEC” are short for Swin-Transformer, ResNet50, VovNet, and Second. 
+          We report NuScenes detection score (NDS) and mean average precision (MAP) on the official NuScenes validation set.
         </p>
         </div>
       </div>
     </div>
 
-    <hr>
-
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-2">Map Construction Robustness</h2>
         <div class="pipeline">
         <img 
-            src="images/qua.png"
+            src="images/benchmark.png"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -247,41 +242,23 @@
       </div>
     </div>
 
+
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-          Qualitative assessment of the state-of-the-art camera-LiDAR fusion-based HD map construction method under the <b>Camera</b> and <b>LiDAR</b> combined sensor corruptions.
+          Benchmarking HD map constructors. 
+          We report detailed information on the methods grouped by input modality, BEV encoder, backbone, and training epochs. 
+          “L” and “C” represent Lidar and Camera, respectively. 
+          “Effi-B0,” “R50,” “PP,” and “SEC” refer to EfficientNet-B0, ResNet50, PointPillars, and Second. 
+          AP denotes performance on the clean NuScenes val set. 
+          The subscripts b., p., and d. denote boundary, pedestrian crossing, and divider, respectively.
         </p>
         </div>
       </div>
     </div>
 
     <hr>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-2">Corruption Severity</h2>
-        <div class="pipeline">
-        <img 
-            src="images/levels.png"
-            class="pipeline image"
-            alt="pipeline image"
-        />
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-        <p>
-          The map construction accuracy of state-of-the-art HD map constructors under each of the three severity levels (Esay, Moderate, and Hard) in different <b>Camera</b> and <b>LiDAR</b> sensor corruption scenarios.
-        </p>
-        </div>
-      </div>
-    </div>
-
 
 </div>
 </div>
