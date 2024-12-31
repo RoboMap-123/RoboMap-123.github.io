@@ -633,7 +633,7 @@
         <h2 class="title is-2">Robustness Evaluation</h2>
         <div class="pipeline">
         <img 
-            src="images/robustness.png"
+            src="images/robustness_eval.png"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -645,41 +645,15 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-          Benchmarking HD map constructors. 
-          Methods are split into groups based on input modality, BEV encoder, backbone, and training epochs. 
-          “L” and “C” represent LiDAR and camera, respectively. 
-          “Effi-B0”, “R50”, “PP”, and “SEC” are short for EfficientNet-B0, ResNet50, PointPillars, and SECOND. 
-          AP denotes performance on the clean nuScenes val set. 
-          The subscripts b., p., and d. are short for the boundary, pedestrian crossing, and divider, respectively.
+          Robustness benchmark of state-of-the-art multi-modal methods under multi-sensor corruptions. 
+          For the 3D object detection task, we use NDS as the metric.
+          Additionally, we use MAP as the metric for the HD map construction task.
         </p>
         </div>
       </div>
     </div>
 
     <hr>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-2">Multi-Sensor Corruptions</h2>
-        <div class="pipeline">
-        <img 
-            src="images/maptr.png"
-            class="pipeline image"
-            alt="pipeline image"
-        />
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-        <p>
-          The results of the MapTR model under different model configurations and multi-sensor corruption types.
-        </p>
-        </div>
-      </div>
-    </div>
 
     <hr>
 
