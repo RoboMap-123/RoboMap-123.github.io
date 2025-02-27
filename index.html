@@ -30,7 +30,7 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <img 
-            src="images/MSC-Bench-logo.png"
+            src="images/logo.png"
             class="center"
             width="180"
           />
@@ -137,13 +137,14 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
           <img 
-              src="images/Radar_Chart_page-0001.jpg"
+              src="images/framework.png"
               class="pipeline image"
               alt="pipeline image"
               style="margin-bottom: 20px;"
           />
       <h2 class="subtitle has-text-centered">
-        This work introduces Multi-Sensor Corruption Benchmark (<strong>MSC-Bench</strong>), the first comprehensive benchmark aimed at evaluating the robustness of multi-sensor autonomous driving perception models against various sensor corruptions.
+        This work introduces <strong>RoboMap</strong>, a multi-modal fusion framework for robust HD map construction. 
+        We propose three key components: data augmentation, a novel multi-modal fusion module, and a modality dropout training strategy.
       </h2>
     </div>
   </div>
@@ -158,16 +159,27 @@
         <h2 class="title is-2">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Multi-sensor fusion models play a crucial role in autonomous driving perception, particularly in tasks like 3D
-            object detection and HD map construction. These models provide essential and comprehensive static environmental information
-            for autonomous driving systems. While camera-LiDAR fusion methods have shown promising results by integrating data from both modalities, 
-            they often depend on complete sensor inputs. This reliance can lead to low robustness and potential failures when sensors are corrupted or missing, raising significant safety concerns.
-            To tackle this challenge, we introduce the Multi-Sensor Corruption Benchmark (<b>MSC-Bench</b>), the first comprehensive benchmark 
-              aimed at evaluating the robustness of multi-sensor autonomous driving perception models against various sensor corruptions. 
-              Our benchmark includes <b>16</b> combinations of corruption types that disrupt both camera and LiDAR inputs, either individually 
-                or concurrently. Extensive evaluations of six 3D object detection models and four HD map construction models reveal substantial 
-                performance degradation under adverse weather conditions and sensor failures, underscoring critical safety issues. The benchmark 
-                toolkit and affiliated code and model checkpoints have been made publicly accessible.
+            High-definition (HD) map construction methods 
+              are crucial for providing precise and comprehensive static 
+              environmental information, which is essential for autonomous 
+              driving systems. While Camera-LiDAR fusion techniques 
+              have shown promising results by integrating data from both 
+              modalities, existing approaches primarily focus on improving 
+              model accuracy, often neglecting the robustness of perception 
+              models—a critical aspect for real-world applications. In this 
+              paper, we explore strategies to enhance the robustness of 
+              multi-modal fusion methods for HD map construction while 
+              maintaining high accuracy. We propose three key components: 
+              data augmentation, a novel multi-modal fusion module, and 
+              a modality dropout training strategy. These components are 
+              evaluated on a challenging dataset containing 13 types of 
+              multi-sensor corruption. Experimental results demonstrate that 
+              our proposed modules significantly enhance the robustness of 
+              baseline methods. Furthermore, our approach achieves state-of-the-art performance on the clean validation set of the 
+              NuScenes dataset. Our findings provide valuable insights for 
+              developing more robust and reliable HD map construction 
+              models, advancing their applicability in real-world autonomous 
+driving scenarios.
           </p>
         </div>
       </div>
@@ -180,7 +192,7 @@
         <h2 class="title is-2">Benchmark Definition</h2>
         <div class="pipeline">
           <img 
-              src="images/new_16_benchmark_page-0001.jpg"
+              src="images/dataset.png"
               class="pipeline image"
               alt="pipeline image"
           />
@@ -192,10 +204,9 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
           <p>
-            Overview of the MSC-Bench. 
-            Definitions of the multi-sensor corruptions in MSC-Bench. 
-            Our benchmark encompasses a total of <b>16</b> corruption types for multi-modal perception models, 
-            which can be categorized into weather, interior, and sensor failure scenarios.
+            Overview of the Multi-Sensor Corruption dataset. 
+            Multi-Sensor Corruption includes 13 types of synthetic camera-LiDAR corruption combinations 
+that perturb both camera and LiDAR inputs, either separately or concurrently. 
           </p>
         </div>
       </div>
@@ -205,10 +216,10 @@
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-2">Benchmark Study</h2>
+        <h2 class="title is-2">RoboMap Overview</h2>
         <div class="pipeline">
         <img 
-            src="images/tab2.png"
+            src="images/framework.png"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -220,39 +231,10 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-          Benchmarking 3D object detection models. 
-          We report detailed information on the methods grouped by input modality, backbone, and input image size. 
-          “L” and “C” represent Lidar and Camera, respectively. 
-          ‘Swin-T”, “R50”, “VOV-99”, and “SEC” are short for Swin-Transformer, ResNet50, VovNet, and Second. 
-          We report NuScenes detection score (NDS) and mean average precision (MAP) on the official NuScenes validation set.
-        </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <div class="pipeline">
-        <img 
-            src="images/tab3.png"
-            class="pipeline image"
-            alt="pipeline image"
-        />
-        </div>
-      </div>
-    </div>
-
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-        <p>
-          Benchmarking HD map constructors. 
-          We report detailed information on the methods grouped by input modality, BEV encoder, backbone, and training epochs. 
-          “L” and “C” represent Lidar and Camera, respectively. 
-          “Effi-B0,” “R50,” “PP,” and “SEC” refer to EfficientNet-B0, ResNet50, PointPillars, and Second. 
-          AP denotes performance on the clean NuScenes val set. 
-          The subscripts b., p., and d. denote boundary, pedestrian crossing, and divider, respectively.
+          Overview of the RoboMap Framework. The RoboMap framework begins by applying data augmentation to both camera images and LiDAR 
+point clouds. Next, features are efficiently extracted from the multi-modal sensor inputs and transformed into a unified Bird’s-Eye View (BEV) space using 
+view transformation techniques. We then introduce a novel multi-modal BEV fusion module to effectively integrate features from both modalities. Finally, 
+the fused BEV features are passed through a shared decoder and prediction heads to generate high-definition (HD) maps.
         </p>
         </div>
       </div>
@@ -263,376 +245,8 @@
 </div>
 </div>
 
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-2">Sensor Corruptions</h2>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp;  </h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 </br>
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Fog</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/fog_1_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item">
-          <img src="GIFs/fog_2_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item">
-          <img src="GIFs/fog_3_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-.results-carousel {
-    display: flex; /* 创建 Flexbox 容器 */
-    justify-content: center; /* 水平居中 */
-}
-
-.item {
-    flex: 1; /* 使每个 item 平均分配空间 */
-    margin: 0 5px; /* 图片之间的间距 */
-}
-
-.item img {
-    width: 100%; /* 图片宽度为其父元素（item）的100% */
-    height: auto; /* 保持比例 */
-}
-</style>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Snow</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/snow_1_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/snow_2_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/snow_3_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Motion Blur</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/motionblur_1_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/motionblur_2_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/motionblur_3_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Spatial Misalignment</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/spatialmisalignment_1_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/spatialmisalignment_2_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/spatialmisalignment_3_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Temporal Misalignment</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/temporalmisalignment_1_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/temporalmisalignment_2_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/temporalmisalignment_3_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Camera Crash</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/CameraCrash_clean_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_clean_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_clean_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Frame Lost</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/FrameLost_clean_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_clean_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_clean_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Cross Sensor</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/clean_cross_sensor_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/clean_cross_sensor_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/clean_cross_sensor_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Cross Talk</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/clean_crosstalk_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/clean_crosstalk_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/clean_crosstalk_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Incom Echo</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/clean_incomplete_echo_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/clean_incomplete_echo_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/clean_incomplete_echo_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Crash & Sensor</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/CameraCrash_cross_sensor_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_cross_sensor_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_cross_sensor_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Crash & Talk</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/CameraCrash_crosstalk_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_crosstalk_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_crosstalk_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Crash & Echo</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/CameraCrash_incomplete_echo_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_incomplete_echo_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/CameraCrash_incomplete_echo_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Frame & Sensor</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/FrameLost_cross_sensor_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_cross_sensor_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_cross_sensor_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Frame & Talk</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/FrameLost_crosstalk_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_crosstalk_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_crosstalk_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-</br>
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <h3 class="title is-3">&nbsp; &nbsp; &nbsp; &nbsp; Frame & Echo</h3>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item">
-          <img src="GIFs/FrameLost_incomplete_echo_easy_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_incomplete_echo_mid_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-        <div class="item item-blurcozyroom">
-          <img src="GIFs/FrameLost_incomplete_echo_hard_multi_view_camera_scene-0035_scene_animation.gif"/>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section">
   <div class="container is-max-desktop">
 
@@ -641,7 +255,7 @@
         <h2 class="title is-2">Robustness Evaluation</h2>
         <div class="pipeline">
         <img 
-            src="images/robustness_eval.png"
+            src="images/evaluation.png"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -653,9 +267,9 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-          Robustness benchmark of state-of-the-art multi-modal methods under multi-sensor corruptions. 
-          For the 3D object detection task, we use NDS as the metric.
-          Additionally, we use MAP as the metric for the HD map construction task.
+          Comparisons with state-of-the-art methods on NuScenes val set. L and C represent LiDAR and camera, respectively. 
+          Effi-B0, R50, PP, and Sec are short for EfficientNet-B0, ResNet50, PointPillars, and SECOND, respectively. 
+          Note that RoboMap (MapModel) means our method is integrated into an existing MapModel.
         </p>
         </div>
       </div>
@@ -666,7 +280,7 @@
       <div class="column is-four-fifths">
         <div class="pipeline">
         <img 
-            src="images/3d_level_benchmark_page-0001.jpg"
+            src="images/eval1.jpg"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -678,8 +292,7 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-          Robustness against all corruption types and severity levels in 3D object detection tasks is 
-          evaluated through the Resilience Score (RS), calculated using the NDS score for varying severity levels.
+          The scores RSc and mRS for the original MapTR model and its variants are presented. RSc uses MAP as the metric.
         </p>
         </div>
       </div>
@@ -690,7 +303,7 @@
       <div class="column is-four-fifths">
         <div class="pipeline">
         <img 
-            src="images/hd_level_benchmark_page-0001.jpg"
+            src="images/eval2.jpg"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -702,8 +315,7 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-          Robustness against all corruption types and severity levels in 3D object detection tasks is 
-          evaluated through the Resilience Score (RS), calculated using the NDS score for varying severity levels.
+          The scores RSc and mRS for the original HiMap model and its variants are presented. RSc uses MAP as the metric.
         </p>
         </div>
       </div>
@@ -715,7 +327,7 @@
       <div class="column is-four-fifths">
         <div class="pipeline">
         <img 
-            src="images/RRS_3D_benchmark_page-0001.jpg"
+            src="images/eval3.jpg"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -727,7 +339,32 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-           Relative robustness visualization. Relative Resilience Score (RRS) computed with NDS using BEVFusion as baseline.
+          Analyze the impact of different modules on the HD map construction task using clean data.
+        </p>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="pipeline">
+        <img 
+            src="images/eval4.jpg"
+            class="pipeline image"
+            alt="pipeline image"
+        />
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+          Relative robustness visualization. Relative Resilience Score (RRS) computed with mAP using original MapTR as baseline.
         </p>
         </div>
       </div>
@@ -739,7 +376,7 @@
       <div class="column is-four-fifths">
         <div class="pipeline">
         <img 
-            src="images/RRS_HD_benchmark_page-0001.jpg"
+            src="images/eval5.jpg"
             class="pipeline image"
             alt="pipeline image"
         />
@@ -751,19 +388,18 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
         <p>
-           Relative robustness visualization. Relative Resilience Score (RRS) computed with mAP using MapTR as the baseline.
+          Relative robustness visualization. Relative Resilience Score (RRS) computed with mAP using original HIMap as baseline.
         </p>
         </div>
       </div>
     </div>
     <hr>
+
 
 </div>
 </div>
 
 </section>
-
-
 
 
 
